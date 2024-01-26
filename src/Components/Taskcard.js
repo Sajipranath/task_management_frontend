@@ -150,7 +150,7 @@ function Taskcard({ projectId, classId }) {
               <h5 className="card-title">{task.title}</h5>
               <h5 className="card-text">{task.description}</h5>
               <h5 className="card-text1">Due Date: {task.dueDate}</h5>
-              <hr />
+            <hr />
             </div>
             <div className="card-footer">
               <div className="footerleft">
@@ -176,28 +176,20 @@ function Taskcard({ projectId, classId }) {
                   </div>
               </div>
               <div className="footerright">
+                 {isMember ? (
                 <div>
-                  {isMember ? (
                   <Link  to={{pathname: '/update-task',search: `?projectId=${projectId}&classId=${classId}&taskId=${task._id}`,}}>
                     <SettingsSuggestIcon  onClick={() => console.log('tasktoedit taskId:', task._id)}/>
                   </Link>
-                  ) : (
-                    <Link  onClick={() => toast.warning("Only user can update task.")}>
-                      <SettingsSuggestIcon/>
-                  </Link>
-                  )}
                 </div>
+                ): null }
+                {isManager ? (
                 <div>
-                  {isManager ? (
                     <Link  to={{pathname: '/AddTask-user', search: `?projectId=${projectId}&classId=${classId}&taskId=${task._id}`}}>
                       <PersonAddIcon />
                     </Link>
-                   ) : (
-                     <Link  onClick={() => toast.warning("Only manager can add user to task.")}>
-                      <PersonAddIcon />
-                    </Link>
-                  )}
                 </div>
+                ) : null}
                 <div>
                   <Link to={{ pathname: '/taskviewer',
                               search: `?projectId=${projectId}&classId=${classId}&taskId=${task._id}`,

@@ -138,28 +138,20 @@ function Classcard({ projectId }) {
                 <div className="card-footer">
                   <div className="footerleft">On progress</div>
                   <div className="footerright">
+                   {isManager ? ( 
                     <div>
-                      {isManager ? (
                         <Link className='link' to={`/Update-class?projectId=${projectId}&classId=${currentClass._id}`}> 
                           <SettingsSuggestIcon onClick={() => console.log('Update-class projectId:', projectId, 'classId:', currentClass._id)} />
                         </Link> 
-                      ) : (
-                        <Link className='link' onClick={() => toast.warning("Only manager can update class.")}>
-                          <SettingsSuggestIcon  />
-                        </Link>
-                      )}
                     </div>
+                   ): null}
+                  {isManager ? (
                     <div>
-                     {isManager ? (
                           <Link className='link' to={`/Add-user?projectId=${projectId}&classId=${currentClass._id}`}> 
                             <PersonAddIcon onClick={() => console.log('Add-user projectId:', projectId, 'classId:', currentClass._id)} />
                           </Link> 
-                        ) : (
-                          <Link className='link' onClick={() => toast.warning("Only manager can asign user.")}>
-                            <PersonAddIcon />
-                          </Link>
-                        )} 
                     </div>
+                    ): null}
                     {/* <div>
                       <Link to={`/Remove-manager?projectId=${projectId}&classId=${currentClass._id}`}>
                         <PersonRemoveIcon onClick={() => console.log('Remove-manager projectId:', projectId, 'classId:', currentClass._id)} />

@@ -99,6 +99,7 @@ function Projectcard3({ projectId, AdminName }) {
           Authorization: authToken,
         },
       });
+      console.log('managerIds response',managersResponse);
       console.log('managerIds',managersResponse.data.projectManagers);
       console.log('managerIds',managersResponse.data.projectManagers.map(manager => manager._id));
       const managerIds = managersResponse.data.projectManagers.map(manager => manager._id) || [];
@@ -120,7 +121,7 @@ function Projectcard3({ projectId, AdminName }) {
     return <p>Loading...</p>;
   }
  if (!isAdmin && !isManager && !isMember) {
-    return <p>You haven't assigned for project yet.</p>;
+    return null;
   }
   return (
     <div className="Procard-columns">
@@ -142,28 +143,20 @@ function Projectcard3({ projectId, AdminName }) {
             </div>
           </div>
           <div className="Procard-footerright">
+            {isAdmin ? (
             <div>
-              {isAdmin ? (
                 <Link to={`/Update-project?projectId=${project._id}`}>
                   <SettingsSuggestIcon />
                 </Link>
-              ) : (
-                <Link onClick={() => toast.warning("Only admin can update project details.")}>
-                  <SettingsSuggestIcon />
-                </Link>
-              )}
             </div>
+            ): null}
+            {isAdmin ? (
             <div>
-              {isAdmin ? (
                 <Link to={`/Add-manager?projectId=${project._id}&projectName=${encodeURIComponent(project.name)}`}>
                   <PersonAddIcon />
                 </Link>
-              ) : (
-                <Link onClick={() => toast.warning("Only admin can add project managers.")}>
-                  <PersonAddIcon />
-                </Link>
-              )}
             </div>
+            ) : null}
             <div>
               <Link to={{ pathname: `/class`, search: `projectId=${project._id}`, }}>
                 <ArrowRightAltIcon />

@@ -8,6 +8,7 @@ import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast} from 'react-toastify';
 import '../Styles/Navbutton.css';
+import Notification from '../Components/Notification';
 //import SearchManager from '../Components/SearchManger';
 
 function Project() {
@@ -53,27 +54,25 @@ useEffect(() => {
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <button className='navButton' >
-            {isAdmin ? (
+          {isAdmin ? (
+            <button className='navButton' >
                 <Link className='link' to="/create-project"> Create Project</Link>  
-               ) : (
-                 <Link className='link' onClick={() => toast.warning("Only admin can Create project.")}> Create Project</Link>
-               )} <AddIcon/>
+                <AddIcon/>
           </button>
+          ): null}
+          {isAdmin ? (
           <button className='navButton' >
-            {isAdmin ? (
               <Link className='link' to="/Create-manager"> Create Manager</Link> 
-               ) : (
-                 <Link className='link' onClick={() => toast.warning("Only admin can Create manger.")}> Create Manager</Link>
-               )} <AddIcon/>
+               <AddIcon/>
           </button>
+          ) : null}
+          {isAdmin ? (
           <button className='navButton' >
-            {isAdmin ? (
             <Link className='link' to="/Create-user"> Create User</Link> 
-             ) : (
-                 <Link className='link' onClick={() => toast.warning("Only admin can Create user.")}> Create User</Link>
-               )} <AddIcon/>
+             <AddIcon/>
           </button>
+          ) : null}
+          <Notification/>
          <Managerlist/>
 
         </Grid>

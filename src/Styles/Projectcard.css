@@ -24,6 +24,7 @@
     border: 1px solid #00000020;
     border-radius: 0.8rem;
     box-sizing: border-box;
+    width: 280px
 }
 
 .del-icon {
